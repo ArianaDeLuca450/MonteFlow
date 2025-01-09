@@ -6,8 +6,8 @@ The following images are the final outputs from the MATLAB code and Abaqus:
 
 **MATLAB Results**:
 
-![MATLAB Results](heat_transfer/matlab_heat_transfer.jpg)
+![MATLAB Results](results/heat_transfer/matlab_heat_transfer.jpg)
 
 **Abaqus Results**
 
-![Abaqus Results](heat_transfer/abaqus_heat_transfer.png)
+![Abaqus Results](results/heat_transfer/abaqus_heat_transfer.png)
