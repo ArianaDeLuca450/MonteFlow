@@ -1,7 +1,7 @@
 clc; clear all;
-n = 11;
-dt = 0.01;
-num_steps = 100;
+n = 11;           % grid size
+dt = 0.01;        % time step
+num_steps = 100;  % number of iterations
 
 % initial conditions
 phi = zeros(n, n); % Temperature matrix
