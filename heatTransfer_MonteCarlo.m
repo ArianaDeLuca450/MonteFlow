@@ -3,28 +3,24 @@ n = 11;          % grid size
 dt = 0.01;       % time step
 iters = 100;     % steps until steady-state solution
 num_sims = 1000; % number of MC simulations
+temp = 1;        % mean temp for SBC
 
 % tracking variables
 avg_temp = zeros(num_sims, 1); % average temp across grid
 cp_temp = zeros(num_sims, 1);  % center point temperatures
-SBC = zeros(num_sims, iters);      % to track values at SBC
-
-% creating normal distribution for the stochastic boundary
-Lbd = 1;        % Temperature for left (stochastic) boundary
-a = Lbd * 0.25; % standard deviation
-b = Lbd;        % mean
+SBC = zeros(num_sims, iters);  % to track values at SBC
 
 % simulation
 for run = 1:num_sims
     % Reset initial conditions for each run
     phi = zeros(n, n);
-    phi(:, 1) = Lbd;   % Left boundary
+    phi(:, 1) = temp;  % Left boundary
     phi(1, :) = 1;     % Bottom boundary
     phi(:, end) = 0;   % Right boundary
     phi(end, :) = 0;   % Top boundary
-    BC = a .* randn(iters, 1) + b; % random values drawn from Gaussian distribution
     for step = 1:iters
         phi_prev = phi;
+        BC = stocasticBoundaryCondition("Brownian", temp, iters, dt);
         for i = 2:n-1
             for j = 2:n-1
                 phi(i, j) = (phi(i+1, j) + phi(i-1, j) + phi(i, j+1) + phi(i, j-1)) / 4;
